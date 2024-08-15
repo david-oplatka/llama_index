@@ -119,7 +119,10 @@ llama_index.core.set_global_handler("arize_phoenix")
 
 ### Literal AI
 
-[Literal AI](https://literalai.com/) is the go-to LLM evaluation and observability solution, enabling engineering and product teams to ship LLM applications reliably, faster and at scale. This is possible through a collaborative development cycle involving prompt engineering, LLM observability, LLM evaluation and LLM monitoring. Conversation Threads and Engine Runs can be automatically logged on Literal AI.
+[Literal AI](https://literalai.com/) is the go-to LLM evaluation and observability solution, enabling engineering and product teams to ship LLM applications reliably, faster and at scale. This is possible through a collaborative development cycle involving prompt engineering, LLM observability, LLM evaluation and LLM monitoring. Conversation Threads and Agent Runs can be automatically logged on Literal AI.
+
+The simplest way to get started and try out Literal AI is to signup on our [cloud instance](https://cloud.getliteral.ai/).
+You can then navigate to **Settings**, grab your API key, and start logging!
 
 #### Usage Pattern
 
@@ -130,18 +133,11 @@ llama_index.core.set_global_handler("arize_phoenix")
 Then add the following lines to your applicative code :
 
 ```python
-from literalai import LiteralClient
-from llama_index.core import Document, VectorStoreIndex
+from llama_index.core import set_global_handler
 
-# By default, the Literal AI client will initialize using the following environment variables :
-# LITERAL_API_KEY
-# LITERAL_API_URL
-literalai_client = LiteralClient()
-
-# You can also explicitly provide the configuration keys like so :
-# literalai_client = LiteralClient(api_key="lsk_xxxxx", url="http://localhost:3000")
-
-literalai_client.instrument_llamaindex()
+# You should provide your Literal AI API key and base url using the following environment variables:
+# LITERAL_API_KEY, LITERAL_API_URL
+set_global_handler("literalai")
 ```
 
 #### Example Guides
@@ -315,7 +311,7 @@ tru_query_engine.query("What did the author do growing up?")
 
 ### HoneyHive
 
-HoneyHive allows users to trace the execution flow of any LLM pipeline. Users can then debug and analyze their traces, or customize feedback on specific trace events to create evaluation or fine-tuning datasets from production.
+HoneyHive allows users to trace the execution flow of any LLM workflow. Users can then debug and analyze their traces, or customize feedback on specific trace events to create evaluation or fine-tuning datasets from production.
 
 #### Usage Pattern
 
@@ -325,7 +321,7 @@ from llama_index.core import set_global_handler
 set_global_handler(
     "honeyhive",
     project="My HoneyHive Project",
-    name="My LLM Pipeline Name",
+    name="My LLM Workflow Name",
     api_key="MY HONEYHIVE API KEY",
 )
 
@@ -337,7 +333,7 @@ from llama_index.core import Settings
 
 # hh_tracer = HoneyHiveLlamaIndexTracer(
 #     project="My HoneyHive Project",
-#     name="My LLM Pipeline Name",
+#     name="My LLM Workflow Name",
 #     api_key="MY HONEYHIVE API KEY",
 # )
 # Settings.callback_manager = CallbackManager([hh_tracer])
