@@ -29,6 +29,8 @@ documents. Any conditions in the filter should not be mentioned in the query as 
 
 Make sure that filters only refer to attributes that exist in the data source.
 Make sure that filters take into account the descriptions of attributes.
+Make sure to only use the following filter operators: '==', '>', '<', '!=', '>=', '<=', 'in'.
+When using the 'in' filter operator, enclose the set of values with ().
 Make sure that filters are only used as needed. If there are no filters that should be \
 applied return [] for the filter value.\
 
